@@ -1,5 +1,6 @@
 package com.uexcel.loginlogoutcoding.config;
 
+import com.uexcel.loginlogoutcoding.CustomSuccessHandler;
 import com.uexcel.loginlogoutcoding.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +17,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    public final CustomUserDetailsService customUserDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
 
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
+    private final CustomSuccessHandler customSuccessHandler;
+
+
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService, CustomSuccessHandler customSuccessHandler) {
         this.customUserDetailsService = customUserDetailsService;
+        this.customSuccessHandler = customSuccessHandler;
     }
 
     @Bean
@@ -31,7 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/**.css").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form->form.loginPage("/login").loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/").permitAll())
+                        .successHandler(customSuccessHandler).permitAll())
                 .logout(out->out.invalidateHttpSession(true).clearAuthentication(true)
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout"));
         return http.build();

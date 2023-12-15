@@ -8,9 +8,9 @@
 </head>
 <body>
 <div id="registration-form">
-    <div class="message success" th:if="${param.error}">Invalid username or password</div>
+    <div class="message error" th:if="${param.error}">Invalid username or password</div>
     <div class="message success" th:if="${param.logout}">You logout successfully</div>
-    <h2>Admin-User Login Page</h2>
+    <h1>Login</h1>
 
     <form th:action="@{/login}" method="post">
 
