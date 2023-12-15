@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" th:href="@{../main.css}">
+</head>
+<body>
+<div id="registration-form">
+    <div class="message success" th:if="${success != null}">[[${success}]]</div>
+
+</div>
+
+<script>
+    document.getElementById('form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Add your registration logic here
+        // For demo purposes, we'll show a success message
+        document.querySelector('.message.success').style.display = 'block';
+        document.querySelector('.message.error').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>

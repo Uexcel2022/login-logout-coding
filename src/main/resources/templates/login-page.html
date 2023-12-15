@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" th:href="@{../main.css}">
+</head>
+<body>
+<div id="registration-form">
+    <div class="message success" th:if="${param.error}">Invalid username or password</div>
+    <div class="message success" th:if="${param.logout}">You logout successfully</div>
+    <h2>Admin-User Login Page</h2>
+
+    <form th:action="@{/login}" method="post">
+
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="username" required placeholder="Enter your username">
+
+        <label for="password">Password:</label>
+        <input  type="password" id="password" name="password" required placeholder="Enter your password">
+
+        <button type="submit">Login</button>
+    </form>
+
+</div>
+
+<script>
+    document.getElementById('form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Add your registration logic here
+        // For demo purposes, we'll show a success message
+        document.querySelector('.message.success').style.display = 'block';
+        document.querySelector('.message.error').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>

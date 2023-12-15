@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" th:href="@{../main.css}">
+</head>
+<body>
+<div id="registration-form">
+    <div class="message success" th:if="${success != null}">[[${success}]]</div>
+    <div class="message error" th:if="${error != null}">[[${error}]]</div>
+    <h2>Registration Form</h2>
+
+    <form th:action="@{/register}" method="post" role="form" th:object="${user}">
+        <label for="fullName">Full name:</label>
+        <input th:field="*{fullName}" type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+
+        <label for="email">Email:</label>
+        <input th:field="*{email}" type="email" id="email" name="email" required placeholder="Enter your email">
+
+        <label for="password1">Password:</label>
+        <input th:field="*{password1}" type="password" id="password1" name="password1" required placeholder="Enter your password">
+
+        <label for="password2">Re-enter password:</label>
+        <input th:field="*{password2}" type="password" id="password2" name="password2" required placeholder="Re-enter password">
+
+        <button type="submit">Submit</button>
+    </form>
+
+</div>
+
+<script>
+    document.getElementById('form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Add your registration logic here
+        // For demo purposes, we'll show a success message
+        document.querySelector('.message.success').style.display = 'block';
+        document.querySelector('.message.error').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
